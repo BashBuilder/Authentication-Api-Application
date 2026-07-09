@@ -52,7 +52,7 @@ namespace ApplicationApi.Presentation.Controllers
             {
                 if ( id <= 0) return BadRequest("Invalid user details");
                 var user = await userInterface.GetUser(id);
-                return user is not null ? Ok(user) : BadRequest("user not found");
+                return user is not null ? Ok(user) : NotFound("user not found");
             }catch(Exception ex)
             {
                 LogException.LogExceptions(ex);
