@@ -2,6 +2,7 @@
 using ApplicationApi.Application.Interfaces;
 using Ecommerce.SharedLibrary.Logs;
 using Ecommerce.SharedLibrary.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace ApplicationApi.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthController(IUser userInterface) : ControllerBase
     {
         [HttpPost("register-user")]
@@ -46,6 +48,7 @@ namespace ApplicationApi.Presentation.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<ActionResult<GetUserDTO>> GetUserDetails(int id)
         {
             try
